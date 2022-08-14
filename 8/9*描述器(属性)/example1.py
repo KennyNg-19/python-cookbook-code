@@ -2,16 +2,25 @@
 Author: kenny_wu
 Date: 2022-08-08 13:02:22
 LastEditors: kenny_wu
-LastEditTime: 2022-08-14 22:38:06
+LastEditTime: 2022-08-14 22:48:47
 Description: 
 '''
 
-
 # Descriptor attribute for an integer type-checked attribute
-class Integer:
 
+# 描述器通常是那些使用到装饰器或元类的大型框架中的一个组件
+
+
+# 如果你只是想简单的自定义某个类的单个属性访问的话就不 用去写描述器了。
+# 这种情况下使用 8.6 小节介绍的 property 技术会更加容易描述器通常是那些使用到装饰器或元类的大型框架中的一个组件
+class Integer:
     def __init__(self, name):
         self.name = name
+
+    """
+    __dict__ 是 
+    描述器的 self.name 属性存储了在实例字典中 被实际使用到的 key。
+    """
 
     def __get__(self, instance, cls):
         if instance is None:
