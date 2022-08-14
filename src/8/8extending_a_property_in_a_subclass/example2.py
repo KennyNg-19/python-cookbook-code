@@ -1,8 +1,18 @@
+'''
+Author: kenny_wu
+Date: 2022-08-08 13:02:22
+LastEditors: kenny_wu
+LastEditTime: 2022-08-14 21:57:42
+Description: 
+'''
 # Example of managed attributes via properties
 
+
 class String:
+
     def __init__(self, name):
         self.name = name
+
     def __get__(self, instance, cls):
         if instance is None:
             return self
@@ -16,10 +26,13 @@ class String:
 
 class Person:
     name = String('name')
+
     def __init__(self, name):
         self.name = name
 
+
 class SubPerson(Person):
+
     @property
     def name(self):
         print('Getting name')
@@ -35,12 +48,13 @@ class SubPerson(Person):
         print('Deleting name')
         super(SubPerson, SubPerson).name.__delete__(self)
 
+
 if __name__ == '__main__':
-   a = Person('Guido')
-   print(a.name)
-   a.name = 'Dave'
-   print(a.name)
-   try:
-       a.name = 42
-   except TypeError as e:
-       print(e)
+    a = Person('Guido')
+    print(a.name)
+    a.name = 'Dave'
+    print(a.name)
+    try:
+        a.name = 42
+    except TypeError as e:
+        print(e)
